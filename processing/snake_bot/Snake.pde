@@ -25,6 +25,10 @@ class Snake {
     } else {
       dead = true;
     } //left off about to check tail hit but you should try to draw for now
+    
+    if (pos == fruit.pos) {
+      tailLength += 1;
+    }
   }
   
   void show(){
