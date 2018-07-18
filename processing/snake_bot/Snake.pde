@@ -10,6 +10,7 @@ class Snake {
   Snake() {
     pos = new PVector(floor(random(w)), floor(random(h)));
     history = new ArrayList<PVector>();
+    history.add(pos.copy());
     tailLength = 1;
     direction = new PVector(1, 0);
     dead = false;
