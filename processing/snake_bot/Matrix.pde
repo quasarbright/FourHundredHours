@@ -22,10 +22,8 @@ class Matrix {
         for(int othercol = 0; othercol < other.cols; othercol++){
           //vecdot
           float sum = 0;
-          for(int thiscol = 0; thiscol < cols; thiscol++){
-            for(int otherrow = 0; otherrow < other.rows; otherrow++){
-              sum += arr[thisrow][thiscol] * other.arr[otherrow][othercol];
-            }
+          for(int i = 0; i < cols; i++){
+            sum += arr[thisrow][i] * other.arr[i][othercol];
           }
           ans.arr[thisrow][othercol] = sum;
 
@@ -34,6 +32,8 @@ class Matrix {
     }
     return ans;
   }
+
+  Matrix columnFromArr()
 
   String toString(){
     String ans = "";
@@ -50,4 +50,17 @@ class Matrix {
     }
     return ans;
   }
+
+  Matrix addBias(){
+    Matrix ans = new Matrix(rows+1, 1)
+    for(int i = 0; i < rows; i++){
+      ans.arr[i][0] = arr[i][0];
+    }
+    ans.arr[rows][0] = 1;
+    return ans;
+  }
+}
+
+float sigmoid(x){
+  return 1 / (1 + pow((float)Math.E, -x));
 }
