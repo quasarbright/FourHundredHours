@@ -8,8 +8,8 @@ class Matrix {
   }
 
   void randomize() {
-    for (int r = 0; r < arr.length; r++) {
-      for (int c = 0; c < arr.length; c++) {
+    for (int r = 0; r < rows; r++) {
+      for (int c = 0; c < cols; c++) {
         arr[r][c] = random(-1, 1);
       }
     }
