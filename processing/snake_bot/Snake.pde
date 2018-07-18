@@ -16,7 +16,7 @@ class Snake {
   }
 
   void update() {
-    PVector newpos = pos.copy()
+    PVector newpos = pos.copy();
     newpos.add(direction);
     if (!(newpos.x >= w || newpos.x < 0 || newpos.y >= h || newpos.y < 0)) {
       pos = newpos;
@@ -24,6 +24,10 @@ class Snake {
     } else {
       dead = true;
     } //left off about to check tail hit but you should try to draw for now
+    
+    if (pos == fruit.pos) {
+      tailLength += 1;
+    }
   }
   
   void show(){
