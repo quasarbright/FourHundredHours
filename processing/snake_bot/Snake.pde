@@ -6,6 +6,7 @@ class Snake {
   int tailLength;
   PVector direction;
   boolean dead;
+  color my_color;
 
   Snake() {
     pos = new PVector(floor(random(w)), floor(random(h)));
@@ -14,6 +15,7 @@ class Snake {
     tailLength = 1;
     direction = new PVector(1, 0);
     dead = false;
+    my_color = color(floor(random(255)), floor(random(255)), floor(random(255)), 127);
   }
 
   void update() {
@@ -30,6 +32,7 @@ class Snake {
   void show(){
     for (int i = 1; i <= tailLength; i++) {
       PVector pos_tmp = history.get(history.size()-i);
+      fill(my_color);
       rect(pos_tmp.x*width/w, pos_tmp.y*height/h, width/w, height/h);
     }
   }
