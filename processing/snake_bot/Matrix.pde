@@ -61,7 +61,7 @@ class Matrix {
     return ans;
   }
 
-  String toString(){
+  String toString(){//tested
     String ans = "";
     for(int i = 0; i < rows; i++){
       String line = "[ ";
@@ -177,6 +177,16 @@ void testAddBias(){
   println(ans);
 }
 
+void testMutate(){
+  float[][] aarr = {{0}, {0.99}, {-0.99}, {1}, {0.54}};
+  Matrix A = new Matrix(aarr);
+  println("before:");
+  println(A);
+  A.mutate(1);
+  println("after (mutation rate of 100%):");
+  println(A);
+}
+
 void runMatrixTests(){
   println("matMul");
   testMatMul();
@@ -186,4 +196,6 @@ void runMatrixTests(){
   testColumnFromArr();
   println("addBias");
   testAddBias();
+  println("mutate");
+  testMutate();
 }
