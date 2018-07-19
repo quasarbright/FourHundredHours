@@ -1,3 +1,4 @@
+float mutationRate = .05;
 class Matrix {
   float[][] arr;
   int rows, cols;
