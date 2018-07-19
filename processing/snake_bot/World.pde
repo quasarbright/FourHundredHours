@@ -5,8 +5,10 @@ and fruit handling. Fruit check happens here
 class World{
   Snake snake;
   PVector fruitPos;
+  color my_color;
   
   World(){
+    my_color = color(floor(random(255)), floor(random(255)), floor(random(255)), 127);
     snake = new Snake();
     fruitPos = new PVector(floor(random(w)), floor(random(h)));
   }
@@ -32,9 +34,9 @@ class World{
   }
   
   void show(){
+    fill(my_color);
     snake.show();
     //show fruit too
-    fill(255,0,0);
     rect(fruitPos.x*width/w, fruitPos.y*height/h, width/w, height/h);
   }
 }
