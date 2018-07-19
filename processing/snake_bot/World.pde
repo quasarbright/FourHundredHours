@@ -30,6 +30,6 @@ class World{
   void show(){
     snake.show();
     //show fruit too
-    rect(fruitPos.x, fruitPos.y, width/w, height/h);
+    rect(fruitPos.x*width/w, fruitPos.y*height/h, width/w, height/h);
   }
 }
