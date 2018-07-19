@@ -35,8 +35,19 @@ class Matrix {
 
         }
       }
+    } else {
+      println("\n\n\n\nWARNING: invalid matmul dimensions\n\n\n\n");
     }
     return ans;
+  }
+  
+  void activate(){
+    //apply sigmoid element wise
+    for(int i = 0; i < rows; i++){
+      for(int j = 0; j < cols; j++){
+        arr[i][j] = sigmoid(arr[i][j]);
+      }
+    }
   }
 
   Matrix getTranspose(){//tested
@@ -82,6 +93,17 @@ class Matrix {
       }
     }
     return ans;
+  }
+  
+  void mutate(float mutationRate){
+    for(int i = 0; i < rows; i++){
+      for(int j = 0; j < cols; j++){
+        if(random(1)<mutationRate){
+          arr[i][j] += random(-.05, .05);
+          arr[i][j] = constrain(arr[i][j], -1, 1);
+        }
+      }
+    }
   }
 }
 
