@@ -4,12 +4,12 @@ with 2 identical hidden layers and biases at every layer.
 Gradient descent is not implemented. Functionality
 is limited to mutation, crossover, and evaluation
 */
-class NeuralNet{
+class NeuralNetwork{
   Matrix wih;//ins -> hidden layer 1
   Matrix whh;//hidden layer 1 -> hidden layer 2
   Matrix who;//hidden layer 2 -> outs
   int ins, hiddens, outs;
-  NeuralNet(int ins, int hiddens, int outs){//tested
+  NeuralNetwork(int ins, int hiddens, int outs){//tested
     //two hidden layers with equal length, all layers are dense
     this.ins = ins;
     this.hiddens = hiddens;
@@ -49,8 +49,8 @@ class NeuralNet{
     who.mutate(mutationRate);
   }
   
-  NeuralNet crossover(NeuralNet other){//tested
-    NeuralNet child = new NeuralNet(ins, hiddens, outs);
+  NeuralNetwork crossover(NeuralNetwork other){//tested
+    NeuralNetwork child = new NeuralNetwork(ins, hiddens, outs);
     Matrix[] thisWeightMatrices = {wih, whh, who};
     Matrix[] otherWeightMatrices = {other.wih, other.whh, other.who};
     Matrix[] childWeightMatrices = new Matrix[3];
@@ -78,7 +78,7 @@ class NeuralNet{
   
   String toString(){
     String ans = "";
-    ans += ("NeuralNet("+ins+", "+hiddens+", "+outs+"):");
+    ans += ("NeuralNetwork("+ins+", "+hiddens+", "+outs+"):");
     ans += "\n";
     ans += ("wih:");
     ans += "\n";
@@ -98,7 +98,7 @@ class NeuralNet{
 
 ///////////////////////////////// tests ////////////////////
 void testNNConstructor(){
-  NeuralNet nn = new NeuralNet(2, 3, 2);
+  NeuralNetwork nn = new NeuralNetwork(2, 3, 2);
   println(nn);
   println("should be a 3x3, 3x4, then a 2x4 all from -1 to 1");
 }
@@ -106,7 +106,7 @@ void testNNConstructor(){
 void testNNEvaluate(){
   float[] invec = {1, 1};
   Matrix input = columnFromArr(invec);
-  NeuralNet nn = new NeuralNet(2, 3, 2);
+  NeuralNetwork nn = new NeuralNetwork(2, 3, 2);
   println(nn);
   println("in:");
   println(input);
@@ -116,15 +116,15 @@ void testNNEvaluate(){
 }
 
 void testNNCrossover(){
-  NeuralNet nn = new NeuralNet(2, 3, 2);
+  NeuralNetwork nn = new NeuralNetwork(2, 3, 2);
   println(nn);
   
-  NeuralNet other = new NeuralNet(2, 3, 2);
+  NeuralNetwork other = new NeuralNetwork(2, 3, 2);
   println(other);
   
   float old = mutationRate;
   mutationRate = 1;
-  NeuralNet child = nn.crossover(other);
+  NeuralNetwork child = nn.crossover(other);
   mutationRate = old;
   println(child);
 }
