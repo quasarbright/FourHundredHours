@@ -1,0 +1,13 @@
+fruit and snake match color
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Committer: caitlin chou <caitlinchou@130-199-131-230.dhcp.bnl.gov>
+#
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	modified:   processing/snake_bot/Snake.pde
+#	modified:   processing/snake_bot/World.pde
+#
