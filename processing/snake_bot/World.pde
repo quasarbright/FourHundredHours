@@ -1,3 +1,7 @@
+/*
+this file contains the logic for snake handling
+and fruit handling. Fruit check happens here
+*/
 class World{
   Snake snake;
   PVector fruitPos;

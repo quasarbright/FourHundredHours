@@ -1,3 +1,9 @@
+/*
+this file contains the logic for a neural network
+with 2 identical hidden layers and biases at every layer.
+Gradient descent is not implemented. Functionality
+is limited to mutation, crossover, and evaluation
+*/
 class NeuralNet{
   Matrix wih;//ins -> hidden layer 1
   Matrix whh;//hidden layer 1 -> hidden layer 2

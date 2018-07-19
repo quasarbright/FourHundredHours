@@ -1,3 +1,8 @@
+/*
+This file contains the logic for matrix math and some
+matrix utilities such as columnFromArr,
+sigmoid, mutate, and randomize
+*/
 float mutationRate = .05;
 class Matrix {
   float[][] arr;

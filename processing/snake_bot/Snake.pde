@@ -1,3 +1,9 @@
+/*
+this file contains logic for the snake's movement
+and death conditions, but does not check for fruit.
+Fruit is handled in world and death cleanup is handled
+in population
+*/
 int w = 20;
 int h = 20;
 class Snake {
