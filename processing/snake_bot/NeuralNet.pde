@@ -15,4 +15,18 @@ class NeuralNet{
     whh.randomize();
     who.randomize();
   }//7-18-18 left off about to make more neuralnet methods like evaluate
+  
+  Matrix evaluate(Matrix input){
+    //expects input to be formatted as a column vector
+    Matrix h1 = wih.matMul(input);
+    h1.activate();
+    h1.addBias();
+    
+    Matrix h2 = whh.matMul(h1);
+    h2.activate();
+    h2.addBias();
+    
+    Matrix out = who.matMul(h2);
+    return out;
+  }
 }
