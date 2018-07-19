@@ -28,6 +28,9 @@ class Snake {
   }
   
   void show(){
-    //
+    for (int i = 1; i <= tailLength; i++) {
+      PVector pos_tmp = history.get(history.size()-i);
+      rect(pos_tmp.x, pos_tmp.y, 1, 1);
+    }
   }
 }
