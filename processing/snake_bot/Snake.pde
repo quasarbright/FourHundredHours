@@ -15,13 +15,25 @@ class Snake {
   int lifetime = 0;
 
   Snake() {
-    //pos = new PVector(floor(w/2), floor(h/2));
-    pos = new PVector((w/2), (h/2));
+    pos = new PVector(floor(w/2), floor(h/2));
+    //pos = new PVector((w/2), (h/2));
     history = new ArrayList<PVector>();
     history.add(pos.copy());
     tailLength = 1;
     direction = new PVector(1, 0);
     dead = false;
+  }
+  
+  void setDirection(PVector v_){
+    PVector v = v_.copy();
+    PVector reverse = v.copy().mult(-1);
+    if(!reverse.equals(direction)){
+      direction = v;
+    }
+  }
+  
+  PVector getDirection(){
+    return direction;
   }
 
   void update() {
