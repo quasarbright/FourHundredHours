@@ -12,9 +12,11 @@ class Snake {
   int tailLength;
   PVector direction;
   boolean dead;
+  int lifetime = 0;
 
   Snake() {
-    pos = new PVector(floor(w/2), floor(h/2));
+    //pos = new PVector(floor(w/2), floor(h/2));
+    pos = new PVector((w/2), (h/2));
     history = new ArrayList<PVector>();
     history.add(pos.copy());
     tailLength = 1;
@@ -24,6 +26,7 @@ class Snake {
 
   void update() {
     if(!dead){
+      lifetime++;
       PVector newpos = pos.copy();
       newpos.add(direction);
       //check bounds
