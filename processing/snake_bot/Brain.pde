@@ -136,11 +136,13 @@ class Brain{
       //evaluate nn to find a direction
       Matrix ins = columnFromArr(in_arr);
       Matrix outs_mat = nn.evaluate(ins);
+      //println(nn);//debug
+      println(outs_mat, "\n");//debug
       float[] outs = {
         outs_mat.arr[0][0],//r
-        outs_mat.arr[0][1],//u
-        outs_mat.arr[0][2],//l
-        outs_mat.arr[0][3],//d
+        outs_mat.arr[1][0],//u
+        outs_mat.arr[2][0],//l
+        outs_mat.arr[3][0],//d
       };
       
       //find the best direction
@@ -159,10 +161,10 @@ class Brain{
         case 1:newDirection = new PVector(0, -1);break;//u
         case 2:newDirection = new PVector(-1, 0);break;//l
         case 3:newDirection = new PVector(0, 1);break;//d
-        default:newDirection = new PVector(-1,-2);//shouldn't get here
+        default:newDirection = new PVector(-1,-5);//shouldn't get here
       }
       world.snake.direction = newDirection;
-      world.snake.update();
+      world.update();
     }//end of if(!dead)
     dead = world.snake.dead;
   }
@@ -175,9 +177,25 @@ class Brain{
     return new Brain(childnn);
   }
   
-  float calcFitness(){
+  long calcFitness(){
     int len = world.snake.tailLength;
-    return len*len;
+    int lifetime = world.snake.lifetime;
+    long fitness;
+    //fitness is based on length and lifetime
+    if (len < 10) {
+      fitness = floor(lifetime *lifetime * pow(2, (floor(len))));
+    } else {
+      //grows slower after 10 to stop fitness from getting stupidly big
+      //ensure greater than len = 9
+      fitness =  lifetime * lifetime;
+      fitness *= pow(2, 10);
+      fitness *=(len-9);
+    }
+    return fitness;
+  }
+  
+  void mutate(){
+    nn.mutate(mutationRate);
   }
 }
 
