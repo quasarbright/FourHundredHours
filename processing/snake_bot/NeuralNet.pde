@@ -40,6 +40,7 @@ class NeuralNetwork{
     
     //evaluate output layer
     Matrix out = who.matMul(h2);
+    out.activate();
     return out;
   }
   
