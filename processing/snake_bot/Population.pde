@@ -18,7 +18,7 @@ class Population {
           break allDead;
         }
       }
-      new_generation();
+      newGeneration();
     }
   }
   void show() {
@@ -35,7 +35,7 @@ class Population {
     }
     return mostFit;
   }
-  void new_generation() {
+  void newGeneration() {
     // add best
     // fill rest with mutated
     Brain[] newBrains = new Brain[popSize];
