@@ -166,7 +166,7 @@ class Brain{
       case 3:newDirection = new PVector(0, 1);break;//d
       default:newDirection = new PVector(-1,-5);//shouldn't get here
     }
-    world.snake.direction = newDirection;
+    world.snake.setDirection(newDirection);
   }
   
   
