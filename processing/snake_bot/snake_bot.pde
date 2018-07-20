@@ -34,5 +34,5 @@ void keyPressed(){
   //    direction = new PVector(1, 0);
   //}
   //world.snake.direction = direction;
-  population.new_generation();
+  population.newGeneration();
 }
