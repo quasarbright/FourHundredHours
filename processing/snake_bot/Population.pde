@@ -27,28 +27,21 @@ class Population {
         brains[i].show();
     }
   }
-  Brain fitnessBasedSelection(){
-    float fitnessSum = 0;
-    for (int i = 0; i < brains.length; i++) {
-      fitnessSum += brains[i].calcFitness();
+  Brain fitnessBasedSelection() {
+    Brain mostFit = brains[0];
+    for (int i = 1; i < popSize; i++) {
+      if (brains[i].calcFitness() > mostFit.calcFitness())
+        mostFit = brains[i];
     }
-    float rand = random(0, fitnessSum);
-    float runningSum = 0;
-    for (int i = 0; i < brains.length; i++) {
-      runningSum += brains[i].calcFitness();
-      if(runningSum > rand) {
-        return brains[i];
-      }
-    }
-    return brains[brains.length-1];
-
+    return mostFit;
   }
   void new_generation() {
+    // add best
+    // fill rest with mutated
     Brain[] newBrains = new Brain[popSize];
-    for (int i = 0; i < popSize; i++) {
-      Brain mom  = fitnessBasedSelection();
-      Brain dad = fitnessBasedSelection();
-      newBrains[i] = mom.crossover(dad);
+    newBrains[0] = fitnessBasedSelection();
+    for (int i = 1; i < popSize; i++) {
+      brains[i] = newBrains[0].mutate();
     }
     brains = newBrains;
   }
