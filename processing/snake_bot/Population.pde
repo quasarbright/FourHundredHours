@@ -41,7 +41,7 @@ class Population {
     Brain[] newBrains = new Brain[popSize];
     newBrains[0] = fitnessBasedSelection();
     for (int i = 1; i < popSize; i++) {
-      brains[i] = newBrains[0].mutate();
+      brains[i] = newBrains[0].crossover(newBrains[0]);
     }
     brains = newBrains;
   }
