@@ -28,7 +28,7 @@ class Population {
     }
   }
   Brain fitnessBasedSelection() {
-    Brain mostFit = brains[0];
+    Brain mostFit = brains[0]; //<>//
     for (int i = 1; i < popSize; i++) {
       if (brains[i].calcFitness() > mostFit.calcFitness())
         mostFit = brains[i];
@@ -41,7 +41,7 @@ class Population {
     Brain[] newBrains = new Brain[popSize];
     newBrains[0] = fitnessBasedSelection();
     for (int i = 1; i < popSize; i++) {
-      brains[i] = newBrains[0].crossover(newBrains[0]);
+      newBrains[i] = newBrains[0].crossover(newBrains[0]);
     }
     brains = newBrains;
   }
