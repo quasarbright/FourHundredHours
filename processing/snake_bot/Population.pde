@@ -33,15 +33,16 @@ class Population {
       if (brains[i].calcFitness() > mostFit.calcFitness())
         mostFit = brains[i];
     }
+    println(mostFit.calcFitness());
     return mostFit;
   }
   void newGeneration() {
     // add best
     // fill rest with mutated
     Brain[] newBrains = new Brain[popSize];
-    newBrains[0] = fitnessBasedSelection();
-    for (int i = 1; i < popSize; i++) {
-      newBrains[i] = newBrains[0].crossover(newBrains[0]);
+    Brain bestBrain = fitnessBasedSelection();
+    for (int i = 0; i < popSize; i++) {
+      newBrains[i] = bestBrain.crossover(bestBrain);
     }
     brains = newBrains;
   }
