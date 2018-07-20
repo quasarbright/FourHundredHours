@@ -4,6 +4,7 @@ matrix utilities such as columnFromArr,
 sigmoid, mutate, and randomize
 */
 float mutationRate = .1;
+float mutationStrength = .2;
 class Matrix {
   float[][] arr;
   int rows, cols;
@@ -105,7 +106,7 @@ class Matrix {
     for(int i = 0; i < rows; i++){
       for(int j = 0; j < cols; j++){
         if(random(1)<mutationRate){
-          arr[i][j] += random(-.05, .05);
+          arr[i][j] += random(-mutationStrength, mutationStrength);
           arr[i][j] = constrain(arr[i][j], -1, 1);
         }
       }
