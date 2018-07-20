@@ -2,13 +2,13 @@ class Population {
   Brain[] brains;
   int popSize;
   Population() {
-    popSize = 100;
+    popSize = 1000;
     brains = new Brain[popSize];
     for (int i = 0; i < popSize; i++) {
       brains[i] = new Brain();
     }
   }
-  void update() {
+  boolean update() {
     for (int i = 0; i < brains.length; i++) {
       brains[i].update();
     }
@@ -19,7 +19,9 @@ class Population {
         }
       }
       newGeneration();
+      return true;
     }
+    return false;
   }
   void show() {
     for (int i = 0; i < brains.length; i++) {
