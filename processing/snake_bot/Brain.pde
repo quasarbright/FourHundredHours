@@ -20,9 +20,8 @@ class Brain{
     dead = false;
   }
   
-  void update(){
-    if(!dead){
-      /////////////////scan surroundings/////////////
+  float[] look(){
+    /////////////////scan surroundings/////////////
       float x = world.snake.pos.x;
       float y = world.snake.pos.y;
       
@@ -131,43 +130,55 @@ class Brain{
         r, ur, u, ul, l, dl, d, dr,
         fr, fur, fu, ful, fl, fdl, fd, fdr
       };
+      return in_arr;
       ////////////////end of scan surroundings//////////////
-      
-      //evaluate nn to find a direction
-      Matrix ins = columnFromArr(in_arr);
-      Matrix outs_mat = nn.evaluate(ins);
-      //println(nn);//debug
-      println(outs_mat, "\n");//debug
-      float[] outs = {
-        outs_mat.arr[0][0],//r
-        outs_mat.arr[1][0],//u
-        outs_mat.arr[2][0],//l
-        outs_mat.arr[3][0],//d
-      };
-      
-      //find the best direction
-      float best = -1;
-      int bestInd = -1;
-      for(int i = 0; i < outs.length; i++){
-        if(outs[i] > best){
-          bestInd = i;
-          best = outs[i];
-        }
+  }
+  
+  void changeDirection(){
+    float[] in_arr = look();
+    //evaluate nn to find a direction
+    Matrix ins = columnFromArr(in_arr);
+    Matrix outs_mat = nn.evaluate(ins);
+    //println(nn);//debug
+    //println(outs_mat, "\n");//debug
+    float[] outs = {
+      outs_mat.arr[0][0],//r
+      outs_mat.arr[1][0],//u
+      outs_mat.arr[2][0],//l
+      outs_mat.arr[3][0],//d
+    };
+    
+    //find the best direction
+    float best = -1;
+    int bestInd = -1;
+    for(int i = 0; i < outs.length; i++){
+      if(outs[i] > best){
+        bestInd = i;
+        best = outs[i];
       }
-      //change direction
-      PVector newDirection;
-      switch(bestInd){
-        case 0:newDirection = new PVector(1, 0);break;//r
-        case 1:newDirection = new PVector(0, -1);break;//u
-        case 2:newDirection = new PVector(-1, 0);break;//l
-        case 3:newDirection = new PVector(0, 1);break;//d
-        default:newDirection = new PVector(-1,-5);//shouldn't get here
-      }
-      world.snake.direction = newDirection;
+    }
+    //change direction
+    PVector newDirection;
+    switch(bestInd){
+      case 0:newDirection = new PVector(1, 0);break;//r
+      case 1:newDirection = new PVector(0, -1);break;//u
+      case 2:newDirection = new PVector(-1, 0);break;//l
+      case 3:newDirection = new PVector(0, 1);break;//d
+      default:newDirection = new PVector(-1,-5);//shouldn't get here
+    }
+    world.snake.direction = newDirection;
+  }
+  
+  
+  
+  void update(){
+    if(!dead){
+      changeDirection();
       world.update();
-    }//end of if(!dead)
+    }
     dead = world.snake.dead;
   }
+  
   void show(){
     world.show();
   }
