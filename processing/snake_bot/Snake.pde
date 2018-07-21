@@ -6,6 +6,7 @@ in population
 */
 int w = 20;
 int h = 20;
+int maxLifeSpan = 2*(w+h);
 class Snake {
   PVector pos;
   ArrayList<PVector> history;
@@ -13,6 +14,8 @@ class Snake {
   PVector direction;
   boolean dead;
   int lifetime = 0;
+  int remainingLife = maxLifeSpan;
+  
 
   Snake() {
     pos = new PVector(floor(w/2), floor(h/2));
@@ -39,6 +42,7 @@ class Snake {
   void update() {
     if(!dead){
       lifetime++;
+      remainingLife--;
       PVector newpos = pos.copy();
       newpos.add(direction);
       //check bounds
