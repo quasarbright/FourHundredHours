@@ -5,25 +5,25 @@ the connection of the world and neural network.
 brains have worlds and neural networks.
 */
 class Brain{
-  World world;
+  Snake snake;
   NeuralNetwork nn;
   boolean dead;
   Brain(){
-    world = new World();
+    snake = new Snake();
     nn = new NeuralNetwork(24, 16, 4);
     dead = false;
   }
   
   Brain(NeuralNetwork nn){
-    world = new World();
+    snake = new Snake();
     this.nn = nn;
     dead = false;
   }
   
   float[] look(){
     /////////////////scan surroundings/////////////
-      float x = world.snake.pos.x;
-      float y = world.snake.pos.y;
+      float x = snake.pos.x;
+      float y = snake.pos.y;
       
       //find walls
       float distToRightWall = w - x;
@@ -47,8 +47,8 @@ class Brain{
       dl = w+h;
       d = w+h;
       dr = w+h;
-      for (int i = 2; i <= world.snake.tailLength; i++) {//loop through tail, skip head
-        PVector tailPos = world.snake.history.get(world.snake.history.size()-i);
+      for (int i = 2; i <= snake.tailLength; i++) {//loop through tail, skip head
+        PVector tailPos = snake.history.get(snake.history.size()-i);
         PVector disp = PVector.sub(tailPos, new PVector(x, y));
         if(disp.x == 0){//above or below
           if(tailPos.y>y){//below
@@ -88,7 +88,7 @@ class Brain{
       fdl = w+h;
       fd = w+h;
       fdr = w+h;
-      PVector fruitPos = world.fruitPos;
+      PVector fruitPos = snake.fruitPos;
       PVector disp = PVector.sub(fruitPos, new PVector(x, y));
       if(disp.x == 0){//above or below
         if(fruitPos.y>y){//below
@@ -166,7 +166,7 @@ class Brain{
       case 3:newDirection = new PVector(0, 1);break;//d
       default:newDirection = new PVector(-1,-5);//shouldn't get here
     }
-    world.snake.setDirection(newDirection);
+    snake.setDirection(newDirection);
   }
   
   
@@ -174,13 +174,13 @@ class Brain{
   void update(){
     if(!dead){
       changeDirection();
-      world.update();
+      snake.update();
     }
-    dead = world.snake.dead;
+    dead = snake.dead;
   }
   
   void show(){
-    world.show();
+    snake.show();
   }
   
   Brain crossover(Brain other){
@@ -189,8 +189,8 @@ class Brain{
   }
   
   long calcFitness(){
-    int len = world.snake.tailLength;
-    int lifetime = world.snake.lifetime;
+    int len = snake.tailLength;
+    int lifetime = snake.lifetime;
     long fitness;
     //fitness is based on length and lifetime
     if (len < 10) {
