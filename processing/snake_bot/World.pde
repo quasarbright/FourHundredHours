@@ -11,6 +11,7 @@ class World{
     my_color = color(floor(random(255)), floor(random(255)), floor(random(255)), 127);
     snake = new Snake();
     fruitPos = new PVector(floor(random(w)), floor(random(h)));
+    //fruitPos = new PVector(w/2+1, h/2);
   }
   
   void update(){

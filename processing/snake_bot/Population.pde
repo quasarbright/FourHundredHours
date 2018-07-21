@@ -29,7 +29,7 @@ class Population {
         brains[i].show();
     }
   }
-  Brain fitnessBasedSelection() {
+  Brain mostFit(){
     Brain mostFit = brains[0]; //<>//
     for (int i = 1; i < popSize; i++) {
       if (brains[i].calcFitness() > mostFit.calcFitness())
@@ -37,14 +37,30 @@ class Population {
     }
     return mostFit;
   }
-  void newGeneration() {
-    // add best
-    // fill rest with mutated
-    Brain[] newBrains = new Brain[popSize];
-    newBrains[0] = fitnessBasedSelection();
-    for (int i = 1; i < popSize; i++) {
-      newBrains[i] = newBrains[0].crossover(newBrains[0]);
+  Brain fitnessBasedSelection() {
+    long fitnessSum = 0;
+    for(Brain brain:brains){
+      fitnessSum+=brain.calcFitness();
     }
-    brains = newBrains;
+    long rand = floor(random(0, fitnessSum));
+    long runningSum = 0;
+    for(Brain brain:brains){
+      runningSum += brain.calcFitness();
+      if(runningSum>rand){
+        return brain;
+      }
+    }
+    return brains[brains.length-1];
+  }
+  void newGeneration() {
+    //// add best
+    //// fill rest with mutated
+    //Brain[] newBrains = new Brain[popSize];
+    //newBrains[0] = mostFit();
+    //for (int i = 1; i < popSize; i++) {
+    //  newBrains[i] = newBrains[0].crossover(newBrains[0]);
+    //}
+    //brains = newBrains;
+    newBrains = Brain[//left off here 7-20-18 about to reimplement crossover//////////////////////////////
   }
 }
