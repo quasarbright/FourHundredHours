@@ -53,15 +53,22 @@ class Population {
     return brains[brains.length-1];
   }
   void newGeneration() {
-    //// add best
-    //// fill rest with mutated
-    Brain[] newBrains = new Brain[popSize];
+    //// mutations of best
+    //Brain[] newBrains = new Brain[popSize];
     //newBrains[0] = mostFit();
     //for (int i = 1; i < popSize; i++) {
     //  newBrains[i] = newBrains[0].crossover(newBrains[0]);
     //}
     //brains = newBrains;
-    newBrains = Brain[//left off here 7-20-18 about to reimplement crossover//////////////////////////////
+    
+    //crossover
+    Brain[] newBrains = new Brain[popSize];
+    for(int i = 0; i < popSize; i++){
+      Brain mom = fitnessBasedSelection();
+      Brain dad = fitnessBasedSelection();
+      newBrains[i] = mom.crossover(dad);
+    }
+    brains = newBrains;
   }
 }
 //=======
