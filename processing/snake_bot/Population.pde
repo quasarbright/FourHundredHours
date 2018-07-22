@@ -63,7 +63,9 @@ class Population {
     
     //crossover
     Brain[] newBrains = new Brain[popSize];
-    for(int i = 0; i < popSize; i++){
+    newBrains[0] = new Brain(mostFit().nn);
+    //if just mostFit(), you get a dead snake
+    for(int i = 1; i < popSize; i++){
       Brain mom = fitnessBasedSelection();
       Brain dad = fitnessBasedSelection();
       newBrains[i] = mom.crossover(dad);
