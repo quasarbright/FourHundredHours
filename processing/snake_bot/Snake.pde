@@ -90,7 +90,7 @@ class Snake {
           remainingLife = maxLifeSpan;
         } else {
           remainingLife--;
-          if(remainingLife == 0){
+          if(remainingLife == 0 && tailLength < 7){
             dead = true;
           }
         }
