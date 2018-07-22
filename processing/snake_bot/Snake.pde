@@ -6,11 +6,12 @@ in population
 */
 int w = 20;
 int h = 20;
-int maxLifeSpan = 4*(w+h);
+int maxLifeSpan = (w+h);
 class Snake {
   PVector pos;
   ArrayList<PVector> history;
   int tailLength;
+  int thisMaxLifeSpan;
   PVector direction;
   boolean dead;
   int lifetime = 0;
@@ -29,6 +30,7 @@ class Snake {
     dead = false;
     fruitPos = new PVector(floor(random(w)), floor(random(h)));
     my_color = color(floor(random(255)), floor(random(255)), floor(random(255)), 127);
+    thisMaxLifeSpan = maxLifeSpan;
   }
   
   void setDirection(PVector v_){
@@ -87,10 +89,11 @@ class Snake {
         pos = newpos;
         history.add(pos.copy());
         if(updateFruit()){
-          remainingLife = maxLifeSpan;
+          thisMaxLifeSpan = maxLifeSpan * tailLength;
+          remainingLife = thisMaxLifeSpan;
         } else {
           remainingLife--;
-          if(remainingLife == 0 && tailLength < 7){
+          if(remainingLife == 0){
             dead = true;
           }
         }
