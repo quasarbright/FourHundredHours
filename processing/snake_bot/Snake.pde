@@ -20,7 +20,7 @@ class Snake {
   
 
   Snake() {
-    pos = new PVector(floor(w/2), floor(h/2));
+    pos = new PVector(floor(random(w)), floor(random(h)));
     //pos = new PVector((w/2), (h/2));
     history = new ArrayList<PVector>();
     history.add(pos.copy());
