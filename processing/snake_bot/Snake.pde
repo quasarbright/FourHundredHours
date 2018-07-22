@@ -6,7 +6,7 @@ in population
 */
 int w = 20;
 int h = 20;
-int maxLifeSpan = 2*(w+h);
+int maxLifeSpan = 4*(w+h);
 class Snake {
   PVector pos;
   ArrayList<PVector> history;
@@ -86,14 +86,14 @@ class Snake {
       if(!dead){
         pos = newpos;
         history.add(pos.copy());
-      }
-    }
-    if(updateFruit()){
-      remainingLife = maxLifeSpan;
-    } else {
-      remainingLife--;
-      if(remainingLife == 0){
-        dead = true;
+        if(updateFruit()){
+          remainingLife = maxLifeSpan;
+        } else {
+          remainingLife--;
+          if(remainingLife == 0){
+            dead = true;
+          }
+        }
       }
     }
   }
