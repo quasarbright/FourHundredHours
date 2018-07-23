@@ -1,10 +1,10 @@
 float maxVel = .2;
 class Seeker{
-  PVector p, v, a;
-  boolean dead;
+  PVector p, v, a, target;
+  boolean dead, success;
   int age;
   DNA dna;
-  Seeker(){
+  Seeker(PVector target){
     p = new PVector(0, ymin+2);
     v = new PVector(0, 0);
     v.rotate(random(TWO_PI));
@@ -12,12 +12,26 @@ class Seeker{
     dead = false;
     age = 0;
     dna = new DNA();
+    this.target = target;
+    success = false;
+  }
+  
+  void updateSuccess(){
+    if(!dead){
+      PVector pp = toPixel(p);
+      PVector targetp = toPixel(target);
+      if(pp.dist(targetp) < targetSize){
+        //target has been reached
+        success = true;
+      }
+    }
   }
   
   void update(){
+    updateSuccess();
     if(age>=lifeSpan){
       dead = true;
-    } else if(!dead){
+    } else if(!dead && !success){
       applyForce(dna.forces[age]);
       v.limit(maxVel);
       p.add(v);
@@ -41,7 +55,7 @@ class Seeker{
   }
   
   Seeker crossover(Seeker other){
-    Seeker child = new Seeker();
+    Seeker child = new Seeker(target);
     child.dna = dna.crossover(other.dna);
     return child;
   }
