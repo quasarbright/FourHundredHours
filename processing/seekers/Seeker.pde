@@ -20,9 +20,11 @@ class Seeker{
     if(!dead){
       PVector pp = toPixel(p);
       PVector targetp = toPixel(target);
-      if(pp.dist(targetp) < targetSize){
+      float distSq = PVector.sub(pp,targetp).magSq();
+      if(distSq < targetSize*targetSize){
         //target has been reached
         success = true;
+        dead = true;
       }
     }
   }
@@ -64,6 +66,7 @@ class Seeker{
     PVector pp = toPixel(p);
     pushMatrix();
     stroke(255);
+    if(dead)stroke(255,0,0);
     strokeWeight(10);
     point(pp.x, pp.y);
     popMatrix();

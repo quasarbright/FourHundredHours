@@ -4,7 +4,7 @@ class Population{
   PVector target;
   Seeker[] seekers;
   Population(){
-    target = new PVector(0, ymax-10);
+    target = new PVector(0, ymax-2);
     seekers = new Seeker[popsize];
     for(int i = 0; i < popsize; i++){
       seekers[i] = new Seeker(target);
@@ -22,7 +22,7 @@ class Population{
   
   boolean allDone(){
     for(Seeker s:seekers){
-      if(!s.dead || s.success){
+      if(!s.dead){
         return false;
       }
     }
@@ -44,7 +44,7 @@ class Population{
   void newGen(){
     seekers = new Seeker[popsize];
     for(int i = 0; i < popsize; i++){
-      //seekers[i] = new Seeker(target);
+      seekers[i] = new Seeker(target);//temporary
     }
   }
 }
