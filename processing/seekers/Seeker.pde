@@ -40,6 +40,12 @@ class Seeker{
     return (xmin <= x && x <= xmax && ymin <= y && y <= ymax);
   }
   
+  Seeker crossover(Seeker other){
+    Seeker child = new Seeker();
+    child.dna = dna.crossover(other.dna);
+    return child;
+  }
+  
   void show(){
     PVector pp = toPixel(p);
     pushMatrix();

@@ -3,16 +3,16 @@ float xmax = 10;
 float ymin = -10;
 float ymax = 10;
 
-Seeker seeker;
+Population population;
 void setup(){
   size(600,600);
-  seeker = new Seeker();
+  population = new Population();
 }
 
 void draw(){
   background(0);
-  seeker.update();
-  seeker.show();
+  population.update();
+  population.show();
 }
 
 PVector toPixel(PVector v){
