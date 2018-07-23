@@ -1,6 +1,6 @@
 int lifeSpan = 200;
 float fmag = 0.1;
-float mutationRate = 0.05;
+float mutationRate = 0.1;
 class DNA{
   PVector[] forces;
   DNA(){

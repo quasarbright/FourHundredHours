@@ -18,14 +18,41 @@ class Seeker{
   
   void updateSuccess(){
     if(!dead){
-      PVector pp = toPixel(p);
-      PVector targetp = toPixel(target);
-      float distSq = PVector.sub(pp,targetp).magSq();
+      float distSq = distSqToTarget();
       if(distSq < targetSize*targetSize){
         //target has been reached
         success = true;
         dead = true;
       }
+    }
+  }
+  
+  float distSqToTarget(){
+    // in pixels, not coords
+    PVector pp = toPixel(p);
+    PVector targetp = toPixel(target);
+    return PVector.sub(pp,targetp).magSq();
+  }
+  
+  float calcFitness(){
+    // success always > dead
+    // die of age always > die early (punish wall hit)
+    if(success){
+      //reached target
+      return float(lifeSpan * lifeSpan) / age * float(height) / distSqToTarget();
+      //guarenteed > lifeSpan
+    } else {
+      //dead
+      if(age < lifeSpan){
+        //died early
+        return  age * float(height) / distSqToTarget();
+        //guarenteed < lifeSpan
+      } else {
+        //died of age
+        return lifeSpan * float(height) / distSqToTarget();
+        //guarenteed < lifeSpan
+      }
+      
     }
   }
   

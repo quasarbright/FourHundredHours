@@ -41,10 +41,44 @@ class Population{
     }
   }
   
-  void newGen(){
-    seekers = new Seeker[popsize];
-    for(int i = 0; i < popsize; i++){
-      seekers[i] = new Seeker(target);//temporary
+  Seeker fitnessBasedSelection(){
+    float fitnessSum = 0;
+    for(Seeker s:seekers){
+      fitnessSum += s.calcFitness();
     }
+    float rand = random(fitnessSum);
+    float runningSum = 0;
+    for(Seeker s:seekers){
+      runningSum += s.calcFitness();
+      if(runningSum >= rand)
+        return s;
+    }
+    return seekers[seekers.length - 1];
+  }
+  
+  Seeker mostFit(){
+    float bestFitness = -1;
+    Seeker bestSeeker = seekers[0];
+    for(Seeker s:seekers){
+      if(s.calcFitness() > bestFitness){
+        bestFitness = s.calcFitness();
+        bestSeeker = s;
+      }
+    }
+    return bestSeeker;
+  }
+  
+  void newGen(){
+    Seeker[] newSeekers = new Seeker[popsize];
+    //pass on clone of best
+    Seeker mostFit = new Seeker(target);
+    mostFit.dna = mostFit().dna;
+    newSeekers[0] = mostFit;
+    for(int i = 1; i < popsize; i++){
+      Seeker mom = fitnessBasedSelection();
+      Seeker dad = fitnessBasedSelection();
+      newSeekers[i] = mom.crossover(dad);
+    }
+    seekers = newSeekers;
   }
 }
