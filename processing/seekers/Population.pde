@@ -3,12 +3,16 @@ int targetSize = 15;
 class Population{
   PVector target;
   Seeker[] seekers;
+  Obstacle[] obstacles;
   Population(){
     target = new PVector(0, ymax-2);
     seekers = new Seeker[popsize];
     for(int i = 0; i < popsize; i++){
       seekers[i] = new Seeker(target);
     }
+    obstacles = new Obstacle[1];
+    obstacles[0] = new Obstacle(new PVector(-5,0),10,1);
+    println(obstacles[0].checkHitbox(new PVector(0,0)));
   }
   
   void update(){
@@ -16,6 +20,11 @@ class Population{
       newGen();
     }
     for(Seeker s:seekers){
+      for(Obstacle obs:obstacles){
+        if(obs.checkHitbox(s.p)){
+          s.dead = true;
+        }
+      }
       s.update();
     }
   }
@@ -38,6 +47,9 @@ class Population{
     popMatrix();
     for(Seeker s:seekers){
       s.show();
+    }
+    for(Obstacle obs:obstacles){
+      obs.show();
     }
   }
   

@@ -33,7 +33,7 @@ class Seeker{
     PVector targetp = toPixel(target);
     return PVector.sub(pp,targetp).magSq();
   }
-  
+
   float calcFitness(){
     // success always > dead
     // die of age always > die early (punish wall hit)
