@@ -1,4 +1,4 @@
-int popsize = 100;
+int popsize = 1000;
 int targetSize = 15;
 class Population{
   PVector target;
@@ -10,9 +10,9 @@ class Population{
     for(int i = 0; i < popsize; i++){
       seekers[i] = new Seeker(target);
     }
-    obstacles = new Obstacle[1];
-    obstacles[0] = new Obstacle(new PVector(-5,0),10,1);
-    println(obstacles[0].checkHitbox(new PVector(0,0)));
+    obstacles = new Obstacle[2];
+    obstacles[0] = new Obstacle(new PVector(-10,-1),12,1);
+    obstacles[1] = new Obstacle(new PVector(-2,3),13,1);
   }
   
   void update(){
